@@ -29,7 +29,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     public String getDepartmentStatistics(String departmentName) {
         List<Lector> lectors = lectorRepository.findByDepartmentsName(departmentName);
         if (lectors.isEmpty()) {
-            return "Department not found or has no employees";
+            return "There is no " + departmentName + " department or " + departmentName + " has no employees";
         }
         Map<String, Long> statistics = lectors.stream()
                 .collect(Collectors.groupingBy(lector -> lector.getDegree().getName(), Collectors.counting()));
@@ -42,7 +42,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     public String getAverageSalary(String departmentName) {
         List<Lector> lectors = lectorRepository.findByDepartmentsName(departmentName);
         if (lectors.isEmpty()) {
-            return "Department not found or has no employees";
+            return "There is no " + departmentName + " department or " + departmentName + " has no employees";
         }
         double averageSalary = lectors.stream().mapToInt(Lector::getSalary).average().orElse(0.0);
         return "The average salary of " + departmentName + " is " + averageSalary;
@@ -51,7 +51,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     public String getCountOfEmployee(String departmentName) {
         long count = lectorRepository.countByDepartmentsName(departmentName);
         if (count == 0) {
-            return "Department not found or has no employees";
+            return "There is no " + departmentName + " department or " + departmentName + " has no employees";
         }
          return count > 1 ? count + " employees" : count + " employee";
     }
