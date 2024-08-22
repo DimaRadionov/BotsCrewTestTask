@@ -27,7 +27,7 @@ public class CMDApplicationRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        initializeData();
+        startingData();
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -37,7 +37,8 @@ public class CMDApplicationRunner implements CommandLineRunner {
             if (command.startsWith("Who is head of department ")) {
                 String departmentName = command.substring("Who is head of department ".length());
                 System.out.println(departmentService.getHeadOfDepartment(departmentName));
-            } else if (command.startsWith("Show ")){
+            }
+            else if (command.startsWith("Show ")){
                 if (command.contains(" statistics")){
                     String departmentName = command.substring("Show ".length(), command.indexOf(" statistics"));
                     System.out.println(departmentService.getDepartmentStatistics(departmentName));
@@ -49,7 +50,7 @@ public class CMDApplicationRunner implements CommandLineRunner {
                 System.out.println(departmentService.getCountOfEmployee(departmentName));
                 }
             }
-              else if (command.startsWith("Global search by ")) {
+            else if (command.startsWith("Global search by ")) {
                 String template = command.substring("Global search by ".length());
                 System.out.println(lectorService.globalSearch(template));
             }
@@ -63,7 +64,7 @@ public class CMDApplicationRunner implements CommandLineRunner {
     }
 
 
-    private void initializeData() {
+    private void startingData() {
         try {
             Degree assistant = new Degree(null, "Assistant");
             Degree associateProfessor = new Degree(null, "Associate Professor");
